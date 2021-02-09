@@ -1,4 +1,5 @@
 import React from 'react'
+import './DashboardForm.css'
 
 const DashboardForm = ({form,setForm,handleSubmit}) => {
     //Changing form state when an input field changes
@@ -9,12 +10,13 @@ const DashboardForm = ({form,setForm,handleSubmit}) => {
         })
     }
 
+
+
     //Destructuring from form object
     const { searchTerm , searchParam } = form
 
     return (
-        <div>
-             <form onSubmit={handleSubmit}>
+             <form className="dashboard__form" onSubmit={handleSubmit}>
                 <input type="text" name="searchTerm" value={searchTerm} onChange={handleChange} placeholder="Search..." />
                 <input type="radio" name="searchParam" value="user" 
                     checked={"user" === searchParam} 
@@ -30,7 +32,6 @@ const DashboardForm = ({form,setForm,handleSubmit}) => {
                 <label htmlFor="repo">Search Repository</label>
                 <button type="submit" disabled={!searchTerm}>Search</button>
             </form>
-        </div>
     )
 }
 

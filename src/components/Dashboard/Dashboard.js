@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import DashboardForm from './DashboardForm/DashboardForm';
+import SearchResults from './SearchResults/SearchResults';
 
 const Dashboard = () => {
     //Lifted state from DashboardForm component so other components can share data  
@@ -9,18 +10,25 @@ const Dashboard = () => {
         searchParam:'user'
     })
 
+    //Added debounced state to only run side effect when submit button is clicked
+    const [debouncedForm, setDebouncedForm] = useState({
+        searchTerm:'',
+        searchParam:''
+    })
+
     const handleSubmit = (event) =>{
         event.preventDefault();
-        console.log(form)
-        console.log("submit working")
-        //TODO: Implement REST API CALL
+        setDebouncedForm({
+            searchTerm:form.searchTerm,
+            searchParam:form.searchParam
+        })
     }
 
     return (
         <div>
             <h1>Dashboard</h1>
             <DashboardForm form={form} setForm={setForm} handleSubmit={handleSubmit} />
-            {/*TODO Create UI Component to render data*/}
+            <SearchResults searchTerm={debouncedForm.searchTerm} choice={debouncedForm.searchParam}/>
         </div>
     )
 }
