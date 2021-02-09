@@ -10,8 +10,6 @@ const DashboardForm = ({form,setForm,handleSubmit}) => {
         })
     }
 
-
-
     //Destructuring from form object
     const { searchTerm , searchParam } = form
 

@@ -5,11 +5,9 @@ import RepoList from '../SearchResults/RepoList/RepoList'
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner'
 import {fetchUserDetails,fetchUsers,fetchRepositories} from '../../../services/api'
 
-
 const SearchResults = ({searchTerm,choice}) => {
     const [results, setResults] = useState(null) 
     const [loading, setLoading] = useState(false)
-    
 
     useEffect(() =>{
         if(choice === "users"){  
@@ -53,16 +51,12 @@ const SearchResults = ({searchTerm,choice}) => {
                 </div>
     }
     
-
-
     return(
         <div className="results">
             {choice === "users" && <UserList results={results} />}
             {choice === "repositories" && <RepoList results={results}/> }
         </div>
     )
-
-
 
 }
 

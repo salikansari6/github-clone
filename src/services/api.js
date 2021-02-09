@@ -39,4 +39,23 @@ return new Promise((resolve,reject) =>{
 })
 }
 
-
+export const getToken = (tokenURL,parameters) =>{
+    return new Promise((resolve,reject)=>{
+            fetch(tokenURL,
+            {
+                method:'POST',
+                headers:{
+                    // "Access-Control-Allow-Origin":"*",
+                    'Accept': 'application/json',
+                    // 'Content-Type':'application/json'
+                },
+                body: parameters
+            })
+            .then(res => res.json())
+            .then(token => {
+                resolve(token['access_token'])
+            })
+            .catch(err => reject(err))
+                       
+    })
+}

@@ -4,7 +4,6 @@ import Route from './components/Route';
 import Login from './components/Login/Login';
 import LoginCallback from './components/LoginCallback';
 
-
 function App() {
   return (
     <div className="App">
