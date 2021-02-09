@@ -1,15 +1,14 @@
 import React from 'react'
 
 const LoginCallback = () => {
-    const code =  window.location.search.split("?code=")[1]
-    const params = new URLSearchParams({
-        'client_id':'bc8937aa7cf8f0b7e106',
-        'client_secret':'19b9deb912c11318b5638bf86b075cef59ec1388',
-        'code':code
-
-    })
-
     React.useEffect(() =>{
+        const code =  window.location.search.split("?code=")[1]
+        const params = new URLSearchParams({
+            'client_id':'bc8937aa7cf8f0b7e106',
+            'client_secret':'19b9deb912c11318b5638bf86b075cef59ec1388',
+            'code':code
+
+        })
         const getToken = (tokenURL) =>{
             return new Promise((resolve,reject)=>{
                     fetch(tokenURL,

@@ -31,9 +31,6 @@ const SearchResults = ({searchTerm,choice}) => {
             console.log(err)
             setLoading(false)
         })
-
-
-        
         }
 
         else if(choice === "repositories"){
