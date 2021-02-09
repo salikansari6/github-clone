@@ -18,18 +18,18 @@ const DashboardForm = ({form,setForm,handleSubmit}) => {
     return (
              <form className="dashboard__form" onSubmit={handleSubmit}>
                 <input type="text" name="searchTerm" value={searchTerm} onChange={handleChange} placeholder="Search..." />
-                <input type="radio" name="searchParam" value="user" 
-                    checked={"user" === searchParam} 
+                <input type="radio" name="searchParam" value="users" 
+                    checked={"users" === searchParam} 
                     onChange={handleChange} 
-                    id="user"
+                    id="users"
                 />
-                <label htmlFor="user">Search User</label>
-                <input type="radio" name="searchParam" value="repo" 
-                    checked={"repo" === searchParam} 
+                <label htmlFor="users">Search User</label>
+                <input type="radio" name="searchParam" value="repositories" 
+                    checked={"repositories" === searchParam} 
                     onChange={handleChange} 
-                    id="repo"
+                    id="repositories"
                 />                
-                <label htmlFor="repo">Search Repository</label>
+                <label htmlFor="repositories">Search Repository</label>
                 <button type="submit" disabled={!searchTerm}>Search</button>
             </form>
     )

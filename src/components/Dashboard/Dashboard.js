@@ -7,13 +7,13 @@ const Dashboard = () => {
     //State for handling form fields along with initial values
     const [form ,setForm] = useState({
         searchTerm:'',
-        searchParam:'user'
+        searchParam:'users'
     })
 
     //Added debounced state to only run side effect when submit button is clicked
     const [debouncedForm, setDebouncedForm] = useState({
         searchTerm:'',
-        searchParam:''
+        searchParam:'users'
     })
 
     const handleSubmit = (event) =>{

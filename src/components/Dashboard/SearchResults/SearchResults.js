@@ -25,8 +25,14 @@ const SearchResults = ({searchTerm,choice}) => {
         .then(user =>{
             setResults(user)
             setLoading(false)
+            
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            setLoading(false)
+        })
+
+
         
         }
 
@@ -37,7 +43,10 @@ const SearchResults = ({searchTerm,choice}) => {
                 setResults(repositories)
                 setLoading(false)
             } )
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                setLoading(false)
+            })
         }
     },[choice,searchTerm])
 
