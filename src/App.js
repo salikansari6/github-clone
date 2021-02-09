@@ -1,17 +1,21 @@
 import './App.css';
 import Dashboard from './components/Dashboard/Dashboard'
 import Route from './components/Route';
+import Login from './components/Login/Login';
+import LoginCallback from './components/LoginCallback';
 
 
 function App() {
   return (
     <div className="App">
       <Route path="/">
-      {/*TODO: Make Login Component*/}
-      Note: Append /dashboard to the URL to view the dashboard component
+        <Login/>
       </Route>
       <Route path="/dashboard">
         <Dashboard/>   
+      </Route>
+      <Route path="/login/callback">
+        <LoginCallback/>
       </Route>
     </div>
   );
