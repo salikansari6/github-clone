@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import DashboardForm from './DashboardForm/DashboardForm';
 import SearchResults from './SearchResults/SearchResults';
 
@@ -15,6 +15,20 @@ const Dashboard = () => {
         searchTerm:'',
         searchParam:'users'
     })
+
+    //
+    useEffect(() =>{
+        const formState = localStorage.getItem('formState');
+        if(formState){
+            setDebouncedForm(JSON.parse(formState))
+            setForm(JSON.parse(formState))
+        }
+
+    },[])
+
+    useEffect(() => {
+        localStorage.setItem('formState',JSON.stringify(debouncedForm))
+    },[debouncedForm])
 
     const handleSubmit = (event) =>{
         event.preventDefault();

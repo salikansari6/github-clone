@@ -14,6 +14,7 @@ const LoginCallback = () => {
        getToken("https://github.com/login/oauth/access_token",params).then((token) =>{
            sessionStorage.setItem("access_token",token)
            window.location.pathname="/dashboard"
+           localStorage.removeItem('formState')
        })
        .catch(err => console.log(err))
        
