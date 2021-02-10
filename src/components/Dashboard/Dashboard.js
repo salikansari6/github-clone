@@ -16,16 +16,17 @@ const Dashboard = () => {
         searchParam:'users'
     })
 
-    //
+    //Fetching search state from localStorage on page load
     useEffect(() =>{
         const formState = localStorage.getItem('formState');
         if(formState){
             setDebouncedForm(JSON.parse(formState))
             setForm(JSON.parse(formState))
         }
-
+        
     },[])
-
+    
+    //Side-effect for persisting search state to localStorage  
     useEffect(() => {
         localStorage.setItem('formState',JSON.stringify(debouncedForm))
     },[debouncedForm])
@@ -42,7 +43,11 @@ const Dashboard = () => {
         <div>
             <h1>Dashboard</h1>
             <DashboardForm form={form} setForm={setForm} handleSubmit={handleSubmit} />
-            <SearchResults searchTerm={debouncedForm.searchTerm} choice={debouncedForm.searchParam}/>
+            <SearchResults 
+                searchTerm={debouncedForm.searchTerm} 
+                choice={debouncedForm.searchParam}
+                
+            />
         </div>
     )
 }

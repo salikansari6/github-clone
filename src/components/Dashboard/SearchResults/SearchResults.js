@@ -13,7 +13,11 @@ const SearchResults = ({searchTerm,choice}) => {
         if(choice === "users"){  
             let promises = []
             setLoading(true)
-            fetchUsers(searchTerm)
+            const parameters = {
+                'q':searchTerm,
+                'per_page' : 10,
+            }
+            fetchUsers(parameters)
             .then(data=>{
                 data.forEach(user =>{
                 promises.push(fetchUserDetails(user.url))
@@ -33,7 +37,11 @@ const SearchResults = ({searchTerm,choice}) => {
 
         else if(choice === "repositories"){
             setLoading(true)
-            fetchRepositories(searchTerm)
+            const parameters = {
+                'q':searchTerm,
+                'per_page' : 10,
+            }
+            fetchRepositories(parameters)
             .then(repositories => {
                 setResults(repositories)
                 setLoading(false)

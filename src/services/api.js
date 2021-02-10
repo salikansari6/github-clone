@@ -1,6 +1,8 @@
-export const fetchRepositories = (searchTerm) =>{
+export const fetchRepositories = (parameters) =>{
     return new Promise((resolve,reject)=>{
-        fetch(`https://api.github.com/search/repositories?q=${searchTerm}`,{
+        const url = new URL('https://api.github.com/search/repositories')
+        url.search = new URLSearchParams(parameters).toString()
+        fetch(url,{
             headers:{
                 "Authorization":`token ${sessionStorage.getItem('access_token')}`
             }
@@ -12,16 +14,18 @@ export const fetchRepositories = (searchTerm) =>{
 }
 
 
-export const fetchUsers = (searchTerm) =>{
-return new Promise((resolve,reject)=>{
-    fetch(`https://api.github.com/search/users?q=${searchTerm}`,{
-        headers:{
-            "Authorization":`token ${sessionStorage.getItem('access_token')}`
-        }
-    })
-    .then(res => res.json())
-    .then(data =>resolve(data.items))
-    .catch(err=>reject(err))
+export const fetchUsers = (parameters) =>{
+    return new Promise((resolve,reject)=>{
+        const url = new URL('https://api.github.com/search/users')
+        url.search = new URLSearchParams(parameters).toString()
+        fetch(url,{
+            headers:{
+                "Authorization":`token ${sessionStorage.getItem('access_token')}`
+            }    
+        })
+        .then(res => res.json())
+        .then(data =>resolve(data.items))
+        .catch(err=>reject(err))
 })
 }
 
