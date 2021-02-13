@@ -2,7 +2,7 @@ import React from 'react'
 
 import {getToken} from '../services/api'
 
-const LoginCallback = () => {
+const LoginCallback = ({setIsLoggedIn}) => {
     React.useEffect(() =>{
         const code =  window.location.search.split("?code=")[1]
         const params = new URLSearchParams({
@@ -13,12 +13,14 @@ const LoginCallback = () => {
         
        getToken("https://github.com/login/oauth/access_token",params).then((token) =>{
            sessionStorage.setItem("access_token",token)
-           window.location.pathname="/dashboard"
+           window.location.pathname="/search-screen"
            localStorage.removeItem('formState')
+           setIsLoggedIn(true)
+           
        })
        .catch(err => console.log(err))
        
-    },[])
+    },[setIsLoggedIn])
 
     return (
         <div>

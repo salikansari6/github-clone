@@ -51,6 +51,9 @@ const SearchResults = ({searchTerm,choice}) => {
                 setLoading(false)
             })
         }
+
+    
+
     },[choice,searchTerm])
 
     if(loading){

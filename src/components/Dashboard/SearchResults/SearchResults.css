@@ -5,9 +5,22 @@
     border-bottom: 1px solid rgb(194, 187, 187);
   }
   
-  .user__repos {
+  .followers {
     /* justify-self: flex-end; */
+    padding:.5rem;
     margin-left: auto;
+
+  }
+
+  .followers__number{
+    display: inline-block;
+    color:white;
+    font-weight:bold;
+    width: 70px;
+    border-radius: 10px;
+    text-align: center;
+    background:rgb(90, 87, 87) ;
+    margin-left: .7rem;
   }
   
   .loading-screen{
@@ -19,8 +32,11 @@
   }
   
   .results {
-    padding-left: 20rem;
-    padding-right: 20rem;
+    margin-top: 2rem;
+    border:1px solid rgb(226, 215, 215);
+    border-radius: 5px;
+    margin-left: 20rem;
+    margin-right: 20rem;
   }
   
   .name-row {
@@ -32,8 +48,8 @@
   .text-small {
     font-size: 0.8rem;
     padding: 0.5rem;
-    font-weight: 300;
-    color: rgb(105, 100, 100);
+    font-weight: bold;
+    /* color: rgb(105, 100, 100); */
     display: flex;
     align-items: center;
   }
@@ -45,8 +61,14 @@
   .full-name {
     margin: 0;
     padding: 0.5rem;
+    font-weight: bold;
   }
   
+  .login{
+    font-weight: bold;
+    margin:0;
+  }
+
   .username,
   .reponame {
     padding: 0.5rem;
@@ -55,9 +77,9 @@
   }
   
   .avatar {
-    height: 70px;
+    height: 40px;
     /* float: left; */
-    width: 70px;
+    width: 40px;
     border-radius: 50%;
   }
   
