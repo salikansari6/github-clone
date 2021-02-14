@@ -1,16 +1,20 @@
-import React,{useEffect} from 'react'
+import React,{useContext,useEffect} from 'react'
 import SearchResults from './SearchResults/SearchResults';
+import { LoginContext } from '../../contexts/LoginContext';
+const Dashboard = () => {
 
-const Dashboard = ({debouncedForm,setIsLoggedIn}) => {
+    const {setIsLoggedIn} = useContext(LoginContext)
+
     useEffect(() =>{
         setIsLoggedIn(true)
-    },[setIsLoggedIn])
+    },[])
+
+
+
     return (
         <div>
-                <SearchResults 
-                    searchTerm={debouncedForm.searchTerm} 
-                    choice={debouncedForm.searchParam}        
-                    
+            {/* <DashboardForm form={form} setForm={setForm} handleSubmit={handleSubmit}  /> */}
+                <SearchResults                     
                 />
         </div>
     )

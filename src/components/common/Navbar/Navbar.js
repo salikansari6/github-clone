@@ -1,10 +1,12 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import './Navbar.css'
 import BrandLogo from '../../../assets/logos/BrandLogo';
 import DashboardForm from '../../Dashboard/DashboardForm/DashboardForm';
+import { LoginContext } from '../../../contexts/LoginContext';
 
-const Navbar = ({form,setForm,handleSubmit,isLoggedIn}) => {
+const Navbar = () => {
 
+    const {isLoggedIn} = useContext(LoginContext)
 
     return (
         <nav className="navbar navbar-dark py-3">
@@ -14,7 +16,7 @@ const Navbar = ({form,setForm,handleSubmit,isLoggedIn}) => {
                 </span>
                 {
                 isLoggedIn &&
-                <DashboardForm form={form} setForm={setForm} handleSubmit={handleSubmit}/>
+                <DashboardForm />
                 }
             </div>
         </nav>

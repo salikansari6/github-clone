@@ -1,17 +1,19 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useContext} from 'react'
 import BrandLogo from '../../assets/logos/BrandLogo'
 import DashboardForm from '../Dashboard/DashboardForm/DashboardForm'
 import './SearchScreen.css'
+import { LoginContext } from '../../contexts/LoginContext';
 
+const SearchScreen = () => {
+    const {goToDashboard,setShowNavbar} = useContext(LoginContext) 
 
-const SearchScreen = ({form ,setForm, handleSubmit,goToDashboard,setShowNavbar}) => {
     if(goToDashboard){
-        window.location.pathname = '/dashboard'
+        window.history.pushState(null,null,'/dashboard')
     }
-   
+
     useEffect(() =>{
         setShowNavbar(false)
-    },[setShowNavbar])
+    },[])
 
     return (
         <div className="search-screen">
@@ -19,7 +21,7 @@ const SearchScreen = ({form ,setForm, handleSubmit,goToDashboard,setShowNavbar})
                 <BrandLogo/>
                 <p>Discover users and repositories from Github with a single click</p>
             </div>
-            <DashboardForm homePage={true} form={form} setForm={setForm} handleSubmit={handleSubmit}/>
+            <DashboardForm homePage={true}/>
         </div>
     )
 }

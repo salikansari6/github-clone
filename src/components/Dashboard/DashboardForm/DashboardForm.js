@@ -1,9 +1,15 @@
-import React from 'react'
+import React,{useContext,useEffect} from 'react'
 import './DashboardForm.css'
 import SearchIcon from '../../../assets/icons/SearchIcon';
+import { FormContext } from '../../../contexts/FormContext';
+import { DebouncedFormContext } from '../../../contexts/DebouncedFormContext';
+import { LoginContext } from '../../../contexts/LoginContext';
 
 
-const DashboardForm = ({form,setForm,handleSubmit,homePage}) => {
+const DashboardForm = ({homePage}) => {
+    const [form,setForm] = useContext(FormContext)
+    const [debouncedForm,setDebouncedForm] = useContext(DebouncedFormContext)
+    const {setGoToDashBoard,setShowNavbar} = useContext(LoginContext)
     //Changing form state when an input field changes
     const handleChange = (event) =>{
         setForm({
@@ -11,6 +17,31 @@ const DashboardForm = ({form,setForm,handleSubmit,homePage}) => {
             [event.target.name]: event.target.value
         })
     }
+
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+        setDebouncedForm({
+            searchTerm:form.searchTerm,
+            searchParam:form.searchParam
+        });
+        setGoToDashBoard(true)
+        setShowNavbar(true)
+    }
+
+    useEffect(() =>{
+            const formState = localStorage.getItem('formState');
+            if(formState){
+                setDebouncedForm(JSON.parse(formState))
+                setForm(JSON.parse(formState))
+                 }
+    },[])
+
+    useEffect(() => {
+        localStorage.setItem('formState',JSON.stringify(debouncedForm))
+        // window.history.pushState(null,null,'/dashboard')
+    },[debouncedForm])
+
+
 
     //Destructuring from form object
     const { searchTerm , searchParam } = form
