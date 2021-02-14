@@ -2,7 +2,7 @@ import React from 'react'
 
 import {getToken} from '../services/api'
 
-const LoginCallback = ({setIsLoggedIn}) => {
+const LoginCallback = () => {
     React.useEffect(() =>{
         const code =  window.location.search.split("?code=")[1]
         const params = new URLSearchParams({
@@ -15,12 +15,11 @@ const LoginCallback = ({setIsLoggedIn}) => {
            sessionStorage.setItem("access_token",token)
            window.location.pathname="/search-screen"
            localStorage.removeItem('formState')
-           setIsLoggedIn(true)
            
        })
        .catch(err => console.log(err))
        
-    },[setIsLoggedIn])
+    },[])
 
     return (
         <div>
