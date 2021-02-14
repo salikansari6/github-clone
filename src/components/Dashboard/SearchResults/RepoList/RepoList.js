@@ -2,8 +2,10 @@ import React from 'react'
 import RepositoryIcon from '../../../../assets/icons/RepositoryIcon'
 import StarIcon from '../../../../assets/icons/StarIcon'
 import formatNumber from '../../../../utilities/formatNumber'
+import languageColorCodes from '../../../../utilities/languageColorCodes.json'
 
 const RepoList = ({results}) => {
+
     return results && results.map(repo =>{
         const { full_name, description, stargazers_count , language,node_id ,license,html_url} = repo
         return(
@@ -14,8 +16,11 @@ const RepoList = ({results}) => {
                 </div>
                 <div className="description">{description}</div>
                 <div className="text-small">
-                <StarIcon/><p>{stargazers_count && formatNumber(stargazers_count)}</p>
-                    <p>{language}</p>
+                    <p className="stars"><StarIcon/>{stargazers_count && formatNumber(stargazers_count)}</p>
+                    <div className="language">
+                        <span className="lang-color" style={{background:languageColorCodes[0][language]}}></span>
+                        <p>{language}</p>
+                    </div>
                     <p> {license && license.name}</p>
                 </div>
             </div>

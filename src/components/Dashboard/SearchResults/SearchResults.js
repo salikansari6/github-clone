@@ -1,31 +1,50 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import './SearchResults.css'
 import UserList from '../SearchResults/UserList/UserList'
 import RepoList from '../SearchResults/RepoList/RepoList'
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner'
 import {fetchUserDetails,fetchUsers,fetchRepositories} from '../../../services/api'
+import { DebouncedFormContext } from '../../../contexts/DebouncedFormContext';
+import formatNumber from '../../../utilities/formatNumber'
 
-const SearchResults = ({searchTerm,choice}) => {
-    const [results, setResults] = useState(null) 
+const SearchResults = ({}) => {
+    const [users, setUsers] = useState([]) 
+    const [repositories, setRepositories] = useState([])
+    const [page,setPage] = useState(1) 
+    const [totalResults,setTotalResults] = useState(0)
     const [loading, setLoading] = useState(false)
+    const [debouncedForm] = useContext(DebouncedFormContext)
+
+    const {searchTerm,searchParam} = debouncedForm
+    const choice = searchParam
 
     useEffect(() =>{
-        if(choice === "users"){  
+        setUsers([])
+        setRepositories([])
+        // setPage(1)
+    },[searchTerm,searchParam,setUsers,setRepositories])
+
+    useEffect(() =>{
+        if(searchParam === "users"){  
+            // setUsers([])
+            setRepositories([])
             let promises = []
             setLoading(true)
             const parameters = {
                 'q':searchTerm,
                 'per_page' : 10,
+                'page': page
             }
             fetchUsers(parameters)
-            .then(data=>{
-                data.forEach(user =>{
+            .then((data)=>{
+                setTotalResults(data.total_count)
+                data.items.forEach(user =>{
                 promises.push(fetchUserDetails(user.url))
             })
             return Promise.all(promises)
         })
-        .then(user =>{
-            setResults(user)
+        .then(newUsers =>{
+            setUsers((prevUser) => [...prevUser,...newUsers])            
             setLoading(false)
             
         })
@@ -35,15 +54,21 @@ const SearchResults = ({searchTerm,choice}) => {
         })
         }
 
-        else if(choice === "repositories"){
+        else if(searchParam === "repositories"){
             setLoading(true)
+            setUsers([])
             const parameters = {
                 'q':searchTerm,
                 'per_page' : 10,
+                'page':page,
+                // 'sort':'stars'
             }
             fetchRepositories(parameters)
-            .then(repositories => {
-                setResults(repositories)
+            .then(newRepositories => {
+                setTotalResults(newRepositories.total_count)
+                if(newRepositories.items){
+                    setRepositories((prevRepos) => [...prevRepos,...newRepositories.items])
+                }
                 setLoading(false)
             } )
             .catch(err => {
@@ -52,20 +77,27 @@ const SearchResults = ({searchTerm,choice}) => {
             })
         }
 
+
+    },[page,searchTerm,searchParam,setRepositories,setUsers])
     
+    const handleScroll = (event) =>{
+        const { scrollTop, clientHeight, scrollHeight } = event.currentTarget
+        console.log(scrollTop)
+        if(scrollTop + clientHeight === scrollHeight){
+                setPage(prev => prev+1)
 
-    },[choice,searchTerm])
-
-    if(loading){
-        return <div className="loading-screen">
-                    <LoadingSpinner/>
-                </div>
+        }
     }
+
     
     return(
-        <div className="results">
-            {choice === "users" && <UserList results={results} />}
-            {choice === "repositories" && <RepoList results={results}/> }
+        <div className="search-results" onScroll={handleScroll} >
+            <div className="no-of-results h2"><b>{totalResults && formatNumber(totalResults)}</b> {choice} found</div>
+            <div className="results" >
+                {choice === "users" && <UserList results={users} loading={loading}/>}
+                {choice === "repositories" && <RepoList results={repositories} loading={loading} /> }
+            </div>
+                { loading && <LoadingSpinner/>}
         </div>
     )
 

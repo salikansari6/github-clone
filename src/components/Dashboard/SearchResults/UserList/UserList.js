@@ -2,7 +2,7 @@ import React from 'react'
 import formatNumber from '../../../../utilities/formatNumber';
 const UserList = ({results}) => {
    return results && results.map(user =>{
-    const {node_id,avatar_url,html_url,login,name,bio,followers,location} = user
+    const {node_id,avatar_url,html_url,login,name,bio,public_repos,followers,location} = user
     return(<div className="user result" key={node_id}>
                 <div className="result__info">
                     <div className="name-row">
