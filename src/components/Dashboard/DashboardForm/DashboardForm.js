@@ -34,7 +34,7 @@ const DashboardForm = ({homePage}) => {
                 setDebouncedForm(JSON.parse(formState))
                 setForm(JSON.parse(formState))
                  }
-    },[])
+    },[setDebouncedForm,setForm])
 
     useEffect(() => {
         localStorage.setItem('formState',JSON.stringify(debouncedForm))

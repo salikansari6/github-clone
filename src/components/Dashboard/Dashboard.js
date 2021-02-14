@@ -7,7 +7,7 @@ const Dashboard = () => {
 
     useEffect(() =>{
         setIsLoggedIn(true)
-    },[])
+    },[setIsLoggedIn])
 
 
 

@@ -84,7 +84,8 @@
     }
   }
   
-  .loading-wrapper{
-    display: flex;
-    justify-content: center;
-  }
+
+.loading-wrapper{
+  display: flex;
+  justify-content: center;
+}

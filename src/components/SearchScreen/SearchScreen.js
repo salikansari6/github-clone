@@ -13,7 +13,7 @@ const SearchScreen = () => {
 
     useEffect(() =>{
         setShowNavbar(false)
-    },[])
+    },[setShowNavbar])
 
     return (
         <div className="search-screen">

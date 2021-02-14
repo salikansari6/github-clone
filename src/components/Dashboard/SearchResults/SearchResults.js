@@ -7,7 +7,7 @@ import {fetchUserDetails,fetchUsers,fetchRepositories} from '../../../services/a
 import { DebouncedFormContext } from '../../../contexts/DebouncedFormContext';
 import formatNumber from '../../../utilities/formatNumber'
 
-const SearchResults = ({}) => {
+const SearchResults = () => {
     const [users, setUsers] = useState([]) 
     const [repositories, setRepositories] = useState([])
     const [page,setPage] = useState(1) 
@@ -82,7 +82,6 @@ const SearchResults = ({}) => {
     
     const handleScroll = (event) =>{
         const { scrollTop, clientHeight, scrollHeight } = event.currentTarget
-        console.log(scrollTop)
         if(scrollTop + clientHeight === scrollHeight){
                 setPage(prev => prev+1)
 
