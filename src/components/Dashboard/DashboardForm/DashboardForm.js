@@ -9,7 +9,7 @@ import { LoginContext } from '../../../contexts/LoginContext';
 const DashboardForm = ({homePage}) => {
     const [form,setForm] = useContext(FormContext)
     const [debouncedForm,setDebouncedForm] = useContext(DebouncedFormContext)
-    const {setGoToDashBoard,setShowNavbar} = useContext(LoginContext)
+    const {setGoToDashBoard,setShowNavbar,goToDashboard} = useContext(LoginContext)
     //Changing form state when an input field changes
     const handleChange = (event) =>{
         setForm({
@@ -47,7 +47,7 @@ const DashboardForm = ({homePage}) => {
     const { searchTerm , searchParam } = form
 
     return (
-             <form className="dashboard__form" style={{width:homePage ? '40%' : '60%'}}  onSubmit={handleSubmit}>
+             <form className={`dashboard__form ${goToDashboard? "animate" :''}`} style={{width:homePage ? '40%' : '60%'}}  onSubmit={handleSubmit}>
                  <div className="search">
                     <input type="text" name="searchTerm" value={searchTerm} className="search__input" onChange={handleChange} placeholder="Please enter username or repository name" />
                     <button type="submit" disabled={!searchTerm} className="search__button"><SearchIcon/></button>

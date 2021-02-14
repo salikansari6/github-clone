@@ -16,7 +16,9 @@ const Navbar = () => {
                 </span>
                 {
                 isLoggedIn &&
-                <DashboardForm />
+                // <div className="navbar-form">
+                    <DashboardForm />
+                // </div>
                 }
             </div>
         </nav>

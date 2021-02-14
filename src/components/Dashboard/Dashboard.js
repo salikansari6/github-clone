@@ -1,9 +1,11 @@
 import React,{useContext,useEffect} from 'react'
 import SearchResults from './SearchResults/SearchResults';
+import './Dashboard.css'
 import { LoginContext } from '../../contexts/LoginContext';
 const Dashboard = () => {
 
-    const {setIsLoggedIn} = useContext(LoginContext)
+    const {setIsLoggedIn,goToDashboard} = useContext(LoginContext)
+
 
     useEffect(() =>{
         setIsLoggedIn(true)
@@ -12,7 +14,7 @@ const Dashboard = () => {
 
 
     return (
-        <div>
+        <div className={ goToDashboard? "dashboard":'' }>
             {/* <DashboardForm form={form} setForm={setForm} handleSubmit={handleSubmit}  /> */}
                 <SearchResults                     
                 />
