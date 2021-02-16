@@ -1,3 +1,6 @@
+# Important 
+Enable the CORS extension on browser for the Login to work
+
 # Github App which uses Github REST API and OAuth
 
 An application where users can login with their existing github account and search for users and repositories
