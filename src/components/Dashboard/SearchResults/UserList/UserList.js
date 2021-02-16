@@ -1,9 +1,9 @@
 import React from 'react'
 import formatNumber from '../../../../utilities/formatNumber';
 const UserList = ({results}) => {
-   return results && results.map(user =>{
+   return results && results.map((user,index) =>{
     const {node_id,avatar_url,html_url,login,name,bio,followers,location} = user
-    return(<div className="user result" key={node_id}>
+    return(<div className="user result" key={node_id+index}>
                 <div className="result__info">
                     <div className="name-row">
                         <img src={avatar_url} className="avatar" alt=""/>

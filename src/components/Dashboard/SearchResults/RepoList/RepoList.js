@@ -6,10 +6,10 @@ import languageColorCodes from '../../../../utilities/languageColorCodes.json'
 
 const RepoList = ({results}) => {
 
-    return results && results.map(repo =>{
+    return results && results.map((repo,index) =>{
         const { full_name, description, stargazers_count , language,node_id ,license,html_url} = repo
         return(
-            <div className="repo result" key={node_id}>
+            <div className="repo result" key={node_id+index}>
             <div className="result__info">
                 <div className="name-row">
                        <RepositoryIcon/> <a href={html_url} rel="noreferrer" target="_blank" className="reponame">{full_name}</a>
