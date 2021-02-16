@@ -6,23 +6,22 @@ import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner'
 import {fetchUserDetails,fetchUsers,fetchRepositories} from '../../../services/api'
 import { DebouncedFormContext } from '../../../contexts/DebouncedFormContext';
 import formatNumber from '../../../utilities/formatNumber'
+import Sort from './Sort/Sort'
 
 const SearchResults = () => {
     const [users, setUsers] = useState([]) 
     const [repositories, setRepositories] = useState([])
-    const [page,setPage] = useState(1) 
     const [totalResults,setTotalResults] = useState(0)
     const [loading, setLoading] = useState(false)
-    const [debouncedForm] = useContext(DebouncedFormContext)
+    const {debouncedForm,page,setPage} = useContext(DebouncedFormContext)
 
-    const {searchTerm,searchParam} = debouncedForm
+    const {searchTerm,searchParam,sort} = debouncedForm
     const choice = searchParam
 
     useEffect(() =>{
         setUsers([])
         setRepositories([])
-        // setPage(1)
-    },[searchTerm,searchParam,setUsers,setRepositories])
+    },[searchTerm,searchParam,sort,setUsers,setRepositories])
 
     useEffect(() =>{
         if(searchParam === "users"){  
@@ -33,7 +32,8 @@ const SearchResults = () => {
             const parameters = {
                 'q':searchTerm,
                 'per_page' : 10,
-                'page': page
+                'page': page,
+                'sort': sort
             }
             fetchUsers(parameters)
             .then((data)=>{
@@ -61,7 +61,7 @@ const SearchResults = () => {
                 'q':searchTerm,
                 'per_page' : 10,
                 'page':page,
-                // 'sort':'stars'
+                'sort': sort
             }
             fetchRepositories(parameters)
             .then(newRepositories => {
@@ -78,7 +78,7 @@ const SearchResults = () => {
         }
 
 
-    },[page,searchTerm,searchParam,setRepositories,setUsers])
+    },[page,searchTerm,searchParam,sort,setRepositories,setUsers])
     
     const handleScroll = (event) =>{
         const { scrollTop, clientHeight, scrollHeight } = event.currentTarget
@@ -89,9 +89,13 @@ const SearchResults = () => {
     }
 
     
+
     return(
         <div className="search-results" onScroll={handleScroll} >
-            <div className="no-of-results h2"><b>{totalResults && formatNumber(totalResults)}</b> {choice} found</div>
+            <div className="results__header">
+                <div className="no-of-results h2"><b>{totalResults && formatNumber(totalResults)}</b> {choice} found</div>
+                <Sort choice={choice} />
+            </div>
             <div className="results" >
                 {choice === "users" && <UserList results={users} loading={loading}/>}
                 {choice === "repositories" && <RepoList results={repositories} loading={loading} /> }

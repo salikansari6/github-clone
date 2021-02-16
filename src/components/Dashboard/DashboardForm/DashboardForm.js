@@ -8,7 +8,7 @@ import { LoginContext } from '../../../contexts/LoginContext';
 
 const DashboardForm = ({homePage}) => {
     const [form,setForm] = useContext(FormContext)
-    const [debouncedForm,setDebouncedForm] = useContext(DebouncedFormContext)
+    const {debouncedForm,setDebouncedForm,setPage} = useContext(DebouncedFormContext)
     const {setGoToDashBoard,setShowNavbar,goToDashboard} = useContext(LoginContext)
     //Changing form state when an input field changes
     const handleChange = (event) =>{
@@ -22,8 +22,10 @@ const DashboardForm = ({homePage}) => {
         event.preventDefault();
         setDebouncedForm({
             searchTerm:form.searchTerm,
-            searchParam:form.searchParam
+            searchParam:form.searchParam,
+            sort:''
         });
+        setPage(1)
         setGoToDashBoard(true)
         setShowNavbar(true)
     }
