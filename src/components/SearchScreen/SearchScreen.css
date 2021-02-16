@@ -11,3 +11,7 @@
 .hero{
     text-align: center;
 }
+
+.hero__tag{
+    margin: 1rem;
+}

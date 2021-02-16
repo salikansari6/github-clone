@@ -19,7 +19,7 @@ const SearchScreen = () => {
         <div className="search-screen">
             <div className="hero">
                 <BrandLogo/>
-                <p>Discover users and repositories from Github with a single click</p>
+                <p className="hero__tag">Discover users and repositories from Github with a single click</p>
             </div>
             <DashboardForm homePage={true}/>
         </div>
