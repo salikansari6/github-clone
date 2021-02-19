@@ -82,9 +82,11 @@ const SearchResults = () => {
     
     const handleScroll = (event) =>{
         const { scrollTop, clientHeight, scrollHeight } = event.currentTarget
-        if(scrollTop + clientHeight === scrollHeight){
+        //Added logic to stop listening to scoll event when there are no more results to fetch
+        if(users.length % page === 0 && repositories.length % page === 0){
+            if(scrollTop + clientHeight === scrollHeight){
                 setPage(prev => prev+1)
-
+            }
         }
     }
 

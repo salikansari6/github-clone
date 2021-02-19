@@ -43,10 +43,7 @@
     margin-top: 2rem;
     border:1px solid rgba(177, 167, 167,.3);
     border-radius: 5px;
-    /* height: 100vh; */
-    /* overflow-y: scroll; */
-    /* margin-left: 20rem; */
-    /* margin-right: 20rem; */
+    
   }
   
   .name-row {
@@ -141,9 +138,30 @@
   }
 
 
-  @media (min-width:300px){
+  @media (max-width:700px){
     .search-results{
       padding:1rem;
+    }
+    .result{
+      display: flex;
+      flex-direction: column;
+    }
+    .name-row{
+      flex-direction: column;
+    }
+    .bio,.location{
+      text-align: center;
+      justify-content: center;
+    }
+    .followers{
+      margin: auto;
+    }
+    .results__header{
+      height: 50px;
+  
+    }
+    .results__header .no-of-results{
+      font-size: 20px;
     }
   }
 

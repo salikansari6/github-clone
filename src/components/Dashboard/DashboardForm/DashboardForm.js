@@ -26,7 +26,12 @@ const DashboardForm = ({homePage}) => {
             sort:''
         });
         setPage(1)
-        setGoToDashBoard(true)
+        if(homePage){
+            setGoToDashBoard(true)
+        }
+        else{
+            setGoToDashBoard(false)
+        }
         setShowNavbar(true)
     }
 
@@ -44,12 +49,11 @@ const DashboardForm = ({homePage}) => {
     },[debouncedForm])
 
 
-
     //Destructuring from form object
     const { searchTerm , searchParam } = form
 
     return (
-             <form className={`dashboard__form ${goToDashboard? "animate" :''}`} style={{width:homePage ? '40%' : '60%'}}  onSubmit={handleSubmit}>
+             <form className={`dashboard__form ${goToDashboard? "animate" :''}`} style={{width: window.innerWidth<=500 ? "100%" : (homePage ? '40%' : '60%')}}  onSubmit={handleSubmit}>
                  <div className="search">
                     <input type="text" name="searchTerm" value={searchTerm} className="search__input" onChange={handleChange} placeholder="Please enter username or repository name" />
                     <button type="submit" disabled={!searchTerm} className="search__button"><SearchIcon/></button>

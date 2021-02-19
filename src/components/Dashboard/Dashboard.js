@@ -9,15 +9,13 @@ const Dashboard = () => {
 
     useEffect(() =>{
         setIsLoggedIn(true)
-    },[setIsLoggedIn])
+    },[setIsLoggedIn,goToDashboard])
 
 
 
     return (
         <div className={ goToDashboard? "dashboard":'' }>
-            {/* <DashboardForm form={form} setForm={setForm} handleSubmit={handleSubmit}  /> */}
-                <SearchResults                     
-                />
+                <SearchResults/>
         </div>
     )
 }
