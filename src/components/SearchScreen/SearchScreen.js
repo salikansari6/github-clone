@@ -3,17 +3,25 @@ import BrandLogo from '../../assets/logos/BrandLogo'
 import DashboardForm from '../Dashboard/DashboardForm/DashboardForm'
 import './SearchScreen.css'
 import { LoginContext } from '../../contexts/LoginContext';
+import redirect from '../../utilities/redirect';
 
 const SearchScreen = () => {
-    const {goToDashboard,setShowNavbar} = useContext(LoginContext) 
+    const {goToDashboard,setShowNavbar,setGoToDashBoard} = useContext(LoginContext) 
 
     if(goToDashboard){
-        window.history.pushState(null,null,'/dashboard')
+        redirect('/dashboard')
     }
 
     useEffect(() =>{
         setShowNavbar(false)
-    },[setShowNavbar])
+        //Cleanup function for returning to original state when dashboard animation is done
+        return() =>{
+            setTimeout(() =>{
+                setGoToDashBoard(false)
+            },1000)
+        }
+
+    },[setShowNavbar,setGoToDashBoard])
 
     return (
         <div className="search-screen">
