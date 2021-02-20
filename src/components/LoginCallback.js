@@ -15,7 +15,6 @@ const LoginCallback = () => {
         //    window.location.pathname="/search-screen"
             localStorage.removeItem('formState')
             redirect('/search-screen')
-           
        })
        .catch(err => console.log(err))
        

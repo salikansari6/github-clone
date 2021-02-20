@@ -8,9 +8,12 @@ import redirect from '../../utilities/redirect';
 const SearchScreen = () => {
     const {goToDashboard,setShowNavbar,setGoToDashBoard} = useContext(LoginContext) 
 
-    if(goToDashboard){
-        redirect('/dashboard')
-    }
+
+    useEffect(() =>{
+        if(goToDashboard){
+            redirect('/dashboard')
+        }
+    },[goToDashboard])
 
     useEffect(() =>{
         setShowNavbar(false)
