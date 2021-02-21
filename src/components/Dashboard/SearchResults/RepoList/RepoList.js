@@ -3,11 +3,12 @@ import RepositoryIcon from '../../../../assets/icons/RepositoryIcon'
 import StarIcon from '../../../../assets/icons/StarIcon'
 import formatNumber from '../../../../utilities/formatNumber'
 import languageColorCodes from '../../../../utilities/languageColorCodes.json'
+import LanguageDist from './LanguageDist/LanguageDist'
 
 const RepoList = ({results}) => {
 
     return results && results.map((repo,index) =>{
-        const { full_name, description, stargazers_count , language,node_id ,license,html_url} = repo
+        const {full_name, description, stargazers_count,language,node_id ,license, html_url,languages_url} = repo
         return(
             <div className="repo result" key={node_id+index}>
             <div className="result__info">
@@ -24,8 +25,7 @@ const RepoList = ({results}) => {
                     <p> {license && license.name}</p>
                 </div>
             </div>
-            
-
+            <LanguageDist languages_url={languages_url}/>
         </div>
         )
 
